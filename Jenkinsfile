@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/gautamdevgrovers/jenkins-docker-demo.git'
+                git 'https://github.com/your-username/jenkins-docker-demo.git'
             }
         }
 
@@ -19,7 +19,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image('jenkins-demo-image').run('-d -p 8082:80')
+                    sh 'docker run -d --name jenkins-demo-container -p 8082:80 jenkins-demo-image'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
 
     post {
         success {
-            echo 'Deployed successfully on Docker!'
+            echo 'Container should now be running on port 8082!'
         }
     }
 }
